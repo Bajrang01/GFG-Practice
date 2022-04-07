@@ -1,0 +1,10 @@
+//Function to find the height of a binary tree.
+int height(struct Node* node)
+{
+    //code here
+    if(node==NULL)
+    return 0;
+    //find the maximum of left and right height.
+    int max = (height(node->left) > height(node->right)) ? height(node->left) : height(node->right);
+    return max+1;
+}
