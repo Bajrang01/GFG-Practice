@@ -1,0 +1,49 @@
+class Solution{
+  public:
+    //Function to check whether the list is palindrome.
+    bool isPalindrome(Node *head)
+    {
+        Node *s, *f; //Two pointer s is slow pointer and f is fast pointer.
+        s=f=head;
+        if(head==NULL)   //if head contains NULL then return false.
+        return false;
+        else if(head->next==NULL)   //if list has only one node then return true.
+        return true;
+        else{
+            //after this loop slow pointer will points mid Node of the list.
+            while(f->next!=NULL&&f->next->next!=NULL){ 
+                s=s->next;
+                f=f->next->next;
+            }
+            //then reverse the list after mid node using three pointers, t, temp, and f.
+            Node *t=s;
+            Node *temp=s;
+            f=s->next;
+            while(t!=NULL){
+                t=f->next;
+                f->next=temp;
+                temp=f;
+                f=t;
+            }
+            //now put Null to the mid node.
+            s->next=NULL;
+            int flag=0;
+            s=head;
+            // here s is pointing first node and temp is pointing first node of the reverse list.
+            while(s!=NULL){
+                if(s->data!=temp->data){   
+                    flag=1; 
+                    break;
+                }
+                s=s->next;
+                temp=temp->next;
+            }
+            if(flag)
+            return false;
+            else
+            return true;
+            
+        }
+    }
+};
+
