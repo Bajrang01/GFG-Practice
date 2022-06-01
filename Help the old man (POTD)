@@ -1,0 +1,23 @@
+//CPP
+class Solution{
+public:
+    vector<vector<int>>v;  //Globally, declare vector V.
+
+//tower of Hanoi function.
+    void towerOfHanoi(int N, int from, int to, int helper){
+        if(N==1){ //Base Case
+            v.push_back({from,to});
+            return;
+        }
+        towerOfHanoi(N-1, from, helper, to); //recursive call, move n-1 discs from A to B, using C.
+        v.push_back({from,to});
+        towerOfHanoi(N-1, helper, to, from); //recursive call, move N-1 discs form B to C, using A.
+    }
+
+    vector<int> shiftPile(int N, int n){
+        //initial call of function.
+        towerOfHanoi(N,1,3,2);
+        return v[n-1];
+    }
+
+};
